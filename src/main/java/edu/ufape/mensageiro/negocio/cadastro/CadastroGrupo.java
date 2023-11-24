@@ -22,8 +22,8 @@ public class CadastroGrupo implements InterfaceCadastroGrupo {
 	//Não permitir cadastrar dois grupos com o mesmo nome
 	@Override
 	public Grupo salvarGrupo(Grupo entity) {
-		if(procurarGrupoNome(entity.getNome()) != null)
-			throw new RuntimeException("Nome de grupo já existe");
+		if(entity.getId() == 0 && procurarGrupoNome(entity.getNome()) != null)
+			throw new RegistroDuplicadoException("Nome de grupo já existe");
 			
 		return repositorioGrupo.save(entity);
 	}
